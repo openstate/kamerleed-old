@@ -1,8 +1,23 @@
 <html>
 <head>
   <title>Kamerleed</title>
+  <style type="text/css">
+  body {
+    background: black;
+    color: white;
+    font-size: 5em;
+    font-family: Helvetica, Verdana, Arial, sans-serif;
+  }
+  
+  #wrapper {
+    width: 700px;
+    margin: 100px auto 0 auto;
+  }
+  </style>
 </head>
 <body>
+  <div id="wrapper">
 <%= @data['title'] %> zit al <%= @data['seniority'] %> dagen in de Tweede Kamer!
+  </div>
 </body>
 </html>
