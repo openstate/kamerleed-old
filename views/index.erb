@@ -13,11 +13,35 @@
     width: 700px;
     margin: 100px auto 0 auto;
   }
+  
+  #sharing {
+    margin: 80px 0 0 0;
+  }
+  .sharing-button {
+    float: left;
+  }
   </style>
 </head>
 <body>
   <div id="wrapper">
-<%= @sentence %>
+    <%= @sentence %>
+    <div id="sharing">
+      <div class="sharing-button">
+        <a href="https://twitter.com/share" class="twitter-share-button" data-via="HackdeOverheid" data-lang="nl">Tweeten</a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+      </div>
+      <div class="sharing-button">
+        <div id="fb-root"></div>
+        <div class="fb-like" data-href="http://www.kamerleed.nl/" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false" data-font="arial"></div>
+        <script>(function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=202705566491057";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+      </div>
+    </div>
   </div>
   
   <script type="text/javascript">
