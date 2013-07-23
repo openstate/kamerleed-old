@@ -20,4 +20,5 @@ PLATFORMS
 
 DEPENDENCIES
   httparty
+  rack
   sinatra

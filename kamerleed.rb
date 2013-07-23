@@ -7,11 +7,26 @@ require 'json'
 require 'sinatra'
 require 'httparty'
 
+def seniority(members)
+  kamerlid = members[rand(members.length)]
+  title = kamerlid['title']
+  seniority = kamerlid['seniority'].to_i
+
+  return {
+    'title' => title,
+    'seniority' => seniority
+  }
+end
+
 get '/' do
   @data = {}
+  @members = []
   File.open('data.json', 'r') do |f|
-    @data = JSON.parse(f.read)
+    @members = JSON.parse(f.read)
   end
+  @options = ['seniority']
+  @function = @options[Random.rand(@options.length)]
+  @data = send(@function, @members)
   puts @data
   erb :index
 end
@@ -19,19 +34,7 @@ end
 get '/update' do
   response = response = HTTParty.get('http://www.tweedekamer.nl/xml/kamerleden.xml')
   #puts response.inspect
-  title = ''
-  seniority = 0
-  response.parsed_response['root']['kamerlid'].each do |kamerlid|
-    #puts kamerlid['title']
-    if kamerlid['seniority'].to_i > seniority
-      seniority = kamerlid['seniority'].to_i
-      title = kamerlid['title']
-    end
-  end
-  data = {
-    :title => title,
-    :seniority => seniority
-  }
+  data = response.parsed_response['root']['kamerlid']
   File.open("data.json","w") do |f|
     f.write(data.to_json)
   end
