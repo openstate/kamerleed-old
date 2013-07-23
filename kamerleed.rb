@@ -12,10 +12,14 @@ def seniority(members)
   title = kamerlid['title']
   seniority = kamerlid['seniority'].to_i
 
-  return {
-    'title' => title,
-    'seniority' => seniority
-  }
+  return "%s zit al %s dagen in de tweede kamer!" % [title, seniority]
+end
+
+def age(members)
+  kamerlid = members[rand(members.length)]
+  title = kamerlid['title']
+  age = kamerlid['age'].to_i
+  return "Wist je dat %s alweer %s jaar oud is?" % [title, age]
 end
 
 get '/' do
@@ -24,10 +28,9 @@ get '/' do
   File.open('data.json', 'r') do |f|
     @members = JSON.parse(f.read)
   end
-  @options = ['seniority']
+  @options = ['seniority', 'age']
   @function = @options[Random.rand(@options.length)]
-  @data = send(@function, @members)
-  puts @data
+  @sentence = send(@function, @members)
   erb :index
 end
 
