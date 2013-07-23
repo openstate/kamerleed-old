@@ -3,9 +3,9 @@
   <title>Kamerleed</title>
   <style type="text/css">
   body {
-    background: black;
-    color: white;
-    font-size: 5em;
+    background: white;
+    color: black;
+/*    font-size: 5em; */
     font-family: Helvetica, Verdana, Arial, sans-serif;
   }
   
@@ -14,17 +14,53 @@
     margin: 100px auto 0 auto;
   }
   
-  #sharing {
-    margin: 80px 0 0 0;
+  #floor {
+    background: url(/images/zaal.png);
+    width: 500px;
+    height: 374px;
+    margin: 0 auto;
   }
+
+  #marker {
+    position: relative;
+    top: 0px;
+    left: 115px;
+    padding: 5px;
+    width: 260px;
+    border: 1px solid black;
+    background: white;
+  }
+
+  #marker img {
+    float: left;
+  }
+
+  #marker p {
+    margin: 0;
+  }
+
+  #sharing {
+    margin: 80px 0 0 250px;
+  }
+
   .sharing-button {
     float: left;
+  }
+  
+  .clear {
+    clear: both;
   }
   </style>
 </head>
 <body>
   <div id="wrapper">
-    <%= @sentence %>
+    <div id="floor">
+      <div id="marker">
+        <img src="http://www.tweedekamer.nl/<%= @kamerlid['photo'] %>" />
+        <p><%= @sentence %></p>
+        <p class="clear"></p>
+      </div>
+    </div>
     <div id="sharing">
       <div class="sharing-button">
         <a href="https://twitter.com/share" class="twitter-share-button" data-via="HackdeOverheid" data-lang="nl"></a>
@@ -41,6 +77,7 @@
           fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));</script>
       </div>
+      <div class="clear"></div>
     </div>
   </div>
   
