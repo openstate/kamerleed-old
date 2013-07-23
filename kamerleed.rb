@@ -22,13 +22,27 @@ def age(members)
   return "Wist je dat %s alweer %s jaar oud is?" % [title, age]
 end
 
+def hometown(members)
+  kamerlid = members[rand(members.length)]
+  title = kamerlid['title']
+  hometown = kamerlid['hometown']
+  return "Blijkbaar woont %s in %s!" % [title, hometown]
+end
+
+def birthplace(members)
+  kamerlid = members[rand(members.length)]
+  title = kamerlid['title']
+  hometown = kamerlid['birthplace']
+  return "%s werd geboren in %s." % [title, hometown]
+end
+
 get '/' do
   @data = {}
   @members = []
   File.open('data.json', 'r') do |f|
     @members = JSON.parse(f.read)
   end
-  @options = ['seniority', 'age']
+  @options = ['seniority', 'age', 'hometown', 'birthplace']
   @function = @options[Random.rand(@options.length)]
   @sentence = send(@function, @members)
   erb :index
