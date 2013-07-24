@@ -46,6 +46,7 @@ get '/' do
   File.open('kamerleden.json', 'r') do |f|
     @members = JSON.parse(f.read)
   end
+
   @options = ['seniority', 'age', 'hometown', 'birthplace']
 
 
@@ -58,16 +59,17 @@ end
 
 get '/update' do
   response = response = HTTParty.get('http://www.tweedekamer.nl/xml/kamerleden.xml')
-  #puts response.inspect
-  data = response.parsed_response['root']['kamerlid']
-  File.open("kamerleden.json","w") do |f|
-    f.write(data.to_json)
-  end
+  members = response.parsed_response['root']['kamerlid']
 
-  response = response = HTTParty.get('http://www.tweedekamer.nl/xml/kamermaps_config.xml')
-  #puts response.inspect
+  response = HTTParty.get('http://www.tweedekamer.nl/xml/kamermaps_config.xml')
   data = response.parsed_response['config']
-  File.open("kamermaps.json","w") do |f|
-    f.write(data.to_json)
-  end  
+
+  data['seats']['seat'].each do |seat|    
+    seat_member = members.select { |member| member['id'] == seat['personId'] }[0]
+    seat_member['seatId'] = seat['id'].to_i if not seat_member.nil?
+  end
+  
+  File.open("kamerleden.json","w") do |f|
+    f.write(members.to_json)
+  end
 end
