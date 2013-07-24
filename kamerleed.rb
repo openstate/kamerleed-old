@@ -10,7 +10,7 @@ require 'httparty'
 def random_member(members)
   #kamerlid = members[rand(members.length)]
   members.each { |member| puts "%s - %s" % [member['name'], member['seatId']] }
-  active = members.select { |member| (not member['seatId'].nil?) and (member['seatId'].to_i <= 34) }
+  active = members.select { |member| (not member['seatId'].nil?) and (member['seatId'].to_i <= 50) }
   kamerlid = active[rand(active.length)]
 
   return kamerlid
@@ -39,9 +39,9 @@ end
 
 def birthplace(kamerlid)
   title = kamerlid['title']
-  hometown = kamerlid['birthplace']
+  birthplace = kamerlid['birthplace']
 
-  return "%s werd geboren in %s." % [title, hometown]
+  return "%s werd geboren in %s." % [title, birthplace]
 end
 
 get '/' do
