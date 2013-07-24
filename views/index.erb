@@ -23,8 +23,6 @@
 
   #marker {
     position: relative;
-    top: 0px;
-    left: 115px;
     padding: 5px;
     width: 260px;
     border: 1px solid black;
@@ -50,13 +48,139 @@
   .clear {
     clear: both;
   }
+  
+  .seat1 {
+    top: 137px;
+    left: 145px;    
+  }
+
+  .seat2 {
+    top: 156px;
+    left: 153px;    
+  }
+
+  .seat3 {
+    top: 137px;
+    left: 131px;    
+  }
+
+  .seat4 {
+    top: 156px;
+    left: 131px;    
+  }
+
+  .seat5 {
+    top: 171px;
+    left: 131px;    
+  }
+
+  .seat6 {
+    top: 137px;
+    left: 107px;    
+  }
+
+  .seat7 {
+    top: 153px;
+    left: 107px;    
+  }
+
+  .seat8 {
+    top: 170px;
+    left: 107px;    
+  }
+
+  .seat9 {
+    top: 184px;
+    left: 116px;    
+  }
+
+  .seat10 {
+    top: 137px;
+    left: 84px;    
+  }
+
+  .seat11 {
+    top: 152px;
+    left: 84px;    
+  }
+
+  .seat12 {
+    top: 167px;
+    left: 84px;    
+  }
+
+  .seat13 {
+    top: 183px;
+    left: 84px;    
+  }
+
+  .seat14 {
+    top: 195px;
+    left: 93px;    
+  }
+
+  .seat15 {
+    top: 137px;
+    left: 60px;    
+  }
+
+  .seat16 {
+    top: 155px;
+    left: 60px;    
+  }
+
+  .seat17 {
+    top: 173px;
+    left: 60px;    
+  }
+
+  .seat18 {
+    top: 189px;
+    left: 68px;    
+  }
+
+  .seat19 {
+    top: 203px;
+    left: 72px;    
+  }
+
+  .seat20 {
+    top: 137px;
+    left: 36px;    
+  }
+
+  .seat21 {
+    top: 155px;
+    left: 36px;    
+  }
+
+  .seat22 {
+    top: 169px;
+    left: 36px;    
+  }
+
+  .seat23 {
+    top: 188px;
+    left: 42px;    
+  }
+
+  .seat24 {
+    top: 203px;
+    left: 47px;    
+  }
+
+  .seat25 {
+    top: 217px;
+    left: 53px;    
+  }
+
   </style>
 </head>
 <body>
   <div id="wrapper">
     <div id="floor">
-      <div id="marker">
-        <img src="http://www.tweedekamer.nl/<%= @kamerlid['photo'] %>" />
+      <div id="marker" class="seat<%= @kamerlid['seatId'] %>">
+        <img src="http://www.tweedekamer.nl/<%= @kamerlid['photo'] %>" title="<%= @kamerlid['name'] %>" />
         <p><%= @sentence %></p>
         <p class="clear"></p>
       </div>
