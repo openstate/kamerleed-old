@@ -42,19 +42,30 @@ def birthplace(kamerlid)
   return "%s werd geboren in %s." % [title, birthplace]
 end
 
-get '/' do
-  @data = {}
-  @members = []
+def load_mps
+  members = []
   File.open('kamerleden.json', 'r') do |f|
-    @members = JSON.parse(f.read)
+    members = JSON.parse(f.read)
   end
+  
+  return members
+end
 
-  @options = ['seniority', 'age', 'hometown', 'birthplace']
+def get_details(mps)
+  options = ['seniority', 'age', 'hometown', 'birthplace']
 
+  details = {
+    :mp => random_member(mps),
+    :function => options[Random.rand(options.length)]
+  }
+  details[:sentence] = send(details[:function], details[:mp])
 
-  @kamerlid = random_member(@members)
-  @function = @options[Random.rand(@options.length)]
-  @sentence = send(@function, @kamerlid)
+  return details
+end
+
+get '/' do
+  @members = load_mps
+  @details = get_details(@members)
 
   erb :index
 end
