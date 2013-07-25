@@ -8,10 +8,8 @@ require 'sinatra'
 require 'httparty'
 
 def random_member(members)
-  #kamerlid = members[rand(members.length)]
-  members.each { |member| puts "%s - %s" % [member['name'], member['seatId']] }
-  active = members.select { |member| (not member['seatId'].nil?) and (member['seatId'].to_i <= 50) }
-  kamerlid = active[rand(active.length)]
+  kamerlid = members[rand(members.length)]
+  kamerlid['blockId'] = (kamerlid['seatId'] / 25) + 1
 
   return kamerlid
 end
