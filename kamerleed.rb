@@ -70,6 +70,14 @@ get '/' do
   erb :index
 end
 
+get '/json/details' do
+  response.headers['Content-type'] = "application/json"
+  @members = load_mps
+  @details = get_details(@members)
+
+  @details.to_json
+end
+
 get '/update' do
   response = response = HTTParty.get('http://www.tweedekamer.nl/xml/kamerleden.xml')
   members = response.parsed_response['root']['kamerlid']
