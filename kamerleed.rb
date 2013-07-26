@@ -7,9 +7,17 @@ require 'json'
 require 'sinatra'
 require 'httparty'
 
+enable :sessions
+
 def random_member(members)
-  kamerlid = members[rand(members.length)]
-  kamerlid['blockId'] = (kamerlid['seatId'] / 25) + 1
+  mp_id = session['mp_id'] || '0'
+  if mp_id.to_i > 0
+    old_mp = members.select { |mp| mp['id'] == mp_id }[0]
+    filtered_members = members.select { |mp| (mp['id'] != mp_id) && (mp['blockId'] != old_mp['blockId']) && (mp['party']['id'] != old_mp['party']['id']) }
+  else
+    filtered_members = members
+  end
+  kamerlid = filtered_members[rand(filtered_members.length)]
 
   return kamerlid
 end
@@ -60,6 +68,8 @@ def get_details(mps)
   }
   details[:sentence] = send(details[:function], details[:mp])
 
+  session['mp_id'] = details[:mp]['id']
+
   return details
 end
 
@@ -87,7 +97,10 @@ get '/update' do
 
   data['seats']['seat'].each do |seat|    
     seat_member = members.select { |member| member['id'] == seat['personId'] }[0]
-    seat_member['seatId'] = seat['id'].to_i if not seat_member.nil?
+    if not seat_member.nil?
+      seat_member['seatId'] = seat['id'].to_i
+      seat_member['blockId'] = ((seat_member['seatId'] / 25) + 1)
+    end
   end
   
   File.open("kamerleden.json","w") do |f|

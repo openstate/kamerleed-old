@@ -4,7 +4,7 @@ window.Kamerleed.loopingEnabled = true;
 
 window.Kamerleed.refresh = function() {
     $('#marker').fadeOut(500, function() {
-        $('#marker').removeClass('block1 block2 block3 block4 block5 block6').addClass('block' + window.Kamerleed.details.mp.blockId);
+        $('#marker').removeClass('block1 block2 block3 block4 block5 block6 block7 blockundefined').addClass('block' + window.Kamerleed.details.mp.blockId);
         $('#marker img').attr('src', 'http://www.tweedekamer.nl' + window.Kamerleed.details.mp.photo);
         $('#marker p.sentence').text(window.Kamerleed.details.sentence);
         $('#marker').fadeIn();        
