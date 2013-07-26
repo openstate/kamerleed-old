@@ -29,6 +29,19 @@
     background: white;
   }
 
+  .avatar {
+    width: 112px;
+    height: 144px;
+  }
+  
+  .avatar img {
+    width: 67px;
+    height: 67px;
+    position: relative;
+    top: 77px;
+    left: 45px;
+  }
+
   #marker img {
     float: left;
   }
@@ -85,8 +98,12 @@
   <div id="wrapper">
     <div id="floor">
       <div id="marker" class="block<%= @details[:mp]['blockId'] %>">
-        <img src="http://www.tweedekamer.nl/<%= @details[:mp]['photo'] %>" title="<%= @details[:mp]['name'] %>" />
-        <p class="sentence"><%= @details[:sentence] %></p>
+        <div style="background: url(http://www.tweedekamer.nl/<%= @details[:mp]['photo'] %>);" class="avatar">
+          <img src="http://www.tweedekamer.nl/images/<%= @details[:mp]['party']['__content__'].downcase %>.jpg" />
+        </div>
+        <div class="info">
+          <p class="sentence"><%= @details[:sentence] %></p>
+        </div>
         <p class="clear"></p>
       </div>
     </div>

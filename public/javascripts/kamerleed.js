@@ -5,7 +5,8 @@ window.Kamerleed.loopingEnabled = true;
 window.Kamerleed.refresh = function() {
     $('#marker').fadeOut(500, function() {
         $('#marker').removeClass('block1 block2 block3 block4 block5 block6 block7 blockundefined').addClass('block' + window.Kamerleed.details.mp.blockId);
-        $('#marker img').attr('src', 'http://www.tweedekamer.nl' + window.Kamerleed.details.mp.photo);
+        $('#marker div.avatar').attr('style', 'background: url(http://www.tweedekamer.nl' + window.Kamerleed.details.mp.photo + ');');
+        $('#marker div.avatar img').attr('src', 'http://www.tweedekamer.nl/images/' + window.Kamerleed.details.mp.party.__content__.toLowerCase() + '.jpg');
         $('#marker p.sentence').text(window.Kamerleed.details.sentence);
         $('#marker').fadeIn();        
     });

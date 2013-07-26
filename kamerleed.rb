@@ -59,6 +59,15 @@ def load_mps
   return members
 end
 
+def load_parties
+  parties = []
+  File.open('parties.json', 'r') do |f|
+    parties = JSON.parse(f.read)
+  end
+  
+  return parties
+end
+
 def get_details(mps)
   options = ['seniority', 'age', 'hometown', 'birthplace']
 
@@ -75,6 +84,8 @@ end
 
 get '/' do
   @members = load_mps
+  @parties = load_parties
+
   @details = get_details(@members)
 
   erb :index
@@ -88,12 +99,21 @@ get '/json/details' do
   @details.to_json
 end
 
+get '/json/parties' do
+  response.headers['Content-type'] = "application/json"
+  @parties = load_parties
+
+  @parties.to_json
+end
+
 get '/update' do
   response = response = HTTParty.get('http://www.tweedekamer.nl/xml/kamerleden.xml')
   members = response.parsed_response['root']['kamerlid']
 
   response = HTTParty.get('http://www.tweedekamer.nl/xml/kamermaps_config.xml')
   data = response.parsed_response['config']
+
+  parties = data['parties']['party']
 
   data['seats']['seat'].each do |seat|    
     seat_member = members.select { |member| member['id'] == seat['personId'] }[0]
@@ -105,5 +125,9 @@ get '/update' do
   
   File.open("kamerleden.json","w") do |f|
     f.write(members.to_json)
+  end
+
+  File.open("parties.json","w") do |f|
+    f.write(parties.to_json)
   end
 end
