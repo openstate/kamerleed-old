@@ -91,15 +91,15 @@ get '/' do
   erb :index
 end
 
-get '/json/details' do
+get '/persons/random/json' do
   response.headers['Content-type'] = "application/json"
   @members = load_mps
-  @details = get_details(@members)
+  @details = random_member(@members)
 
   @details.to_json
 end
 
-get '/json/parties' do
+get '/parties/json' do
   response.headers['Content-type'] = "application/json"
   @parties = load_parties
 
@@ -107,21 +107,9 @@ get '/json/parties' do
 end
 
 get '/update' do
-  response = response = HTTParty.get('http://www.tweedekamer.nl/xml/kamerleden.xml')
-  members = response.parsed_response['root']['kamerlid']
+  parties = HTTParty.get('http://api.kamerleed.nl/v2.1/parties/')
 
-  response = HTTParty.get('http://www.tweedekamer.nl/xml/kamermaps_config.xml')
-  data = response.parsed_response['config']
-
-  parties = data['parties']['party']
-
-  data['seats']['seat'].each do |seat|    
-    seat_member = members.select { |member| member['id'] == seat['personId'] }[0]
-    if not seat_member.nil?
-      seat_member['seatId'] = seat['id'].to_i
-      seat_member['blockId'] = ((seat_member['seatId'] / 25) + 1)
-    end
-  end
+  members = parties.map { |party| party["members"] }.flatten
   
   File.open("kamerleden.json","w") do |f|
     f.write(members.to_json)
