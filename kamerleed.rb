@@ -7,6 +7,8 @@ require 'json'
 require 'sinatra'
 require 'httparty'
 
+set :session_secret, ENV["SESSION_KEY"] || 'too secret'
+
 enable :sessions
 
 def random_member(members)

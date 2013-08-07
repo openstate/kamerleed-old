@@ -6,6 +6,48 @@ window.Kamerleed = window.Kamerleed || {
 window.Kamerleed.interval = 5000;
 window.Kamerleed.loopingEnabled = false;
 
+window.Kamerleed.tidbits = [
+    {
+        title: 'seniority',
+        enabled: function() { return (window.Kamerleed.person.profile.start_date != null); },
+        sentence: function() {
+            var d = Date.parse(window.Kamerleed.person.profile.start_date);
+            var s = Math.floor((Date.now() - d) / 86400000) - 1;
+            return sprintf("%s zit al %s dagen in de tweede kamer!", window.Kamerleed.person.profile.name, s);
+        }
+    },
+    /*
+    FIXME: better to parse age for this?
+    {
+        title: 'age',
+        enabled: function() { return (window.Kamerleed.person.profile.date_of_birth != null); },
+        sentence: function() { }
+    },
+    */
+    {
+        title: 'birthplace',
+        enabled: function() { return (window.Kamerleed.person.profile.birth_place != null); },
+        sentence: function() {
+            return sprintf(
+                "Blijkbaar is %s geboren in %s!",
+                window.Kamerleed.person.profile.name,
+                window.Kamerleed.person.profile.birth_place
+            );
+        }
+    },
+    {
+        title: 'hometown',
+        enabled: function() { return (window.Kamerleed.person.profile.home_town != null); },
+        sentence: function() {
+            return sprintf(
+                "Blijkbaar woont %s in %s!",
+                window.Kamerleed.person.profile.name,
+                window.Kamerleed.person.profile.home_town
+            );
+        }
+    },
+];
+
 window.Kamerleed.init = function() {
     // detemine what to load
     if (window.location.pathname == '/') {
@@ -30,6 +72,14 @@ window.Kamerleed.load_person = function(slug) {
     });
 };
 
+window.Kamerleed.select_tidbit = function() {
+    var enabled_tidbits = $.grep(window.Kamerleed.tidbits, function(item, idx) {
+        return item.enabled();
+    });
+    var random_index = Math.floor((Math.random()*enabled_tidbits.length));
+    return enabled_tidbits[random_index];
+};
+
 window.Kamerleed.refresh_full_interface = function() {
     // do interface refresh here
     document.title = sprintf("%s - %s", window.Kamerleed.app.title, window.Kamerleed.person.profile.name);
@@ -39,10 +89,11 @@ window.Kamerleed.refresh_full_interface = function() {
 
 window.Kamerleed.refresh_marker = function() {
     $('#marker').fadeOut(500, function() {
+        var tidbit = window.Kamerleed.select_tidbit();
         $('#marker').removeClass('block1 block2 block3 block4 block5 block6 block7 blockundefined').addClass('block' + window.Kamerleed.person.profile.block);
         $('#marker div.avatar').attr('style', 'background: url(' + window.Kamerleed.person.profile.photo + ');');
         $('#marker div.avatar img').attr('src', 'http://www.tweedekamer.nl/images/' + window.Kamerleed.person.profile.party.slug + '.jpg');
-        //$('#marker p.sentence').text(window.Kamerleed.details.sentence);
+        $('#marker p.sentence').text(tidbit.sentence());
         $('#marker').fadeIn();        
     });
 };
