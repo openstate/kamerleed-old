@@ -22,6 +22,11 @@ def random_member(members)
   return kamerlid
 end
 
+def find_member(slug, members)
+  filtered_members = members.select { |mp| mp['slug'] == slug }
+  return filtered_members[0]
+end
+
 def seniority(kamerlid)
   title = kamerlid['title']
   seniority = kamerlid['seniority'].to_i
@@ -86,8 +91,6 @@ get '/' do
   @members = load_mps
   @parties = load_parties
 
-  @details = get_details(@members)
-
   erb :index
 end
 
@@ -98,6 +101,25 @@ get '/persons/random/json' do
 
   @details.to_json
 end
+
+get '/persons/:slug' do
+  response.headers['Content-type'] = "application/json"
+  
+  @members = load_mps
+  @details = find_member(params[:slug], @members)
+  
+  @details.to_json
+end
+
+get '/persons/:slug/json' do
+  response.headers['Content-type'] = "application/json"
+  
+  @members = load_mps
+  @details = find_member(params[:slug], @members)
+  
+  @details.to_json
+end
+
 
 get '/parties/json' do
   response.headers['Content-type'] = "application/json"

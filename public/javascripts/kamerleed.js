@@ -1,6 +1,6 @@
 window.Kamerleed = window.Kamerleed || {};
 window.Kamerleed.interval = 5000;
-window.Kamerleed.loopingEnabled = true;
+window.Kamerleed.loopingEnabled = false;
 
 window.Kamerleed.refresh = function() {
     $('#marker').fadeOut(500, function() {
@@ -20,12 +20,14 @@ window.Kamerleed.update = function() {
 };
 
 window.Kamerleed.looper = function() {
+/*
     window.Kamerleed.update();
     if (window.Kamerleed.loopingEnabled) {
         setTimeout(function() {
             window.Kamerleed.looper();
         }, window.Kamerleed.interval);
     }
+*/
 };
 
 $(document).ready(function() {
