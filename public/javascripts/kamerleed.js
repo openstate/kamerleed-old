@@ -11,11 +11,7 @@ window.Kamerleed.init = function() {
     if (window.location.pathname == '/') {
         // get random member
         console.log('homepage, should get a random member now ...');
-        $.get('/persons/random/json', function (data) {
-            var slug = data['slug'];
-            console.log('Should fetch data for ' + slug + ' now ...');
-            window.Kamerleed.load_person(slug);
-        }, 'json');
+        window.Kamerleed.update();
     } else if (person_match = window.location.pathname.match(/^\/persons\/([a-zA-z\-]+)\/?/)) {
         var slug = person_match[1];
         console.log('Politician page, should fetch data for ' + slug + ' now ...');
@@ -29,6 +25,8 @@ window.Kamerleed.load_person = function(slug) {
     $.get('/persons/' + slug + '/json', function (data) {
         window.Kamerleed.person = data;
         window.Kamerleed.refresh_full_interface();
+        // loop the interface
+        window.Kamerleed.looper();
     });
 };
 
@@ -50,29 +48,26 @@ window.Kamerleed.refresh_marker = function() {
 };
 
 window.Kamerleed.update = function() {
-    $.get('/json/details', function (data) {
-        window.Kamerleed.details = data;
-        window.Kamerleed.refresh();
-    });
+    $.get('/persons/random/json', function (data) {
+        var slug = data['slug'];
+        console.log('Should fetch data for ' + slug + ' now ...');
+        window.Kamerleed.load_person(slug);
+    }, 'json');
 };
 
 window.Kamerleed.looper = function() {
-/*
-    window.Kamerleed.update();
     if (window.Kamerleed.loopingEnabled) {
         setTimeout(function() {
-            window.Kamerleed.looper();
+            window.Kamerleed.update();
         }, window.Kamerleed.interval);
     }
-*/
 };
 
 $(document).ready(function() {
     console.log('kamerleed');
     window.Kamerleed.init();
-/*
+
     setTimeout(function() {
         window.Kamerleed.looper();
     }, window.Kamerleed.interval);
-*/
 });
