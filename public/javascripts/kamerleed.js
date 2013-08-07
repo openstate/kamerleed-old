@@ -35,15 +35,16 @@ window.Kamerleed.load_person = function(slug) {
 window.Kamerleed.refresh_full_interface = function() {
     // do interface refresh here
     document.title = sprintf("%s - %s", window.Kamerleed.app.title, window.Kamerleed.person.profile.name);
+    window.Kamerleed.refresh_marker();
     console.log('Interface refreshed!'); 
 };
 
-window.Kamerleed.refresh = function() {
+window.Kamerleed.refresh_marker = function() {
     $('#marker').fadeOut(500, function() {
-        $('#marker').removeClass('block1 block2 block3 block4 block5 block6 block7 blockundefined').addClass('block' + window.Kamerleed.details.mp.blockId);
-        $('#marker div.avatar').attr('style', 'background: url(http://www.tweedekamer.nl' + window.Kamerleed.details.mp.photo + ');');
-        $('#marker div.avatar img').attr('src', 'http://www.tweedekamer.nl/images/' + window.Kamerleed.details.mp.party.__content__.toLowerCase() + '.jpg');
-        $('#marker p.sentence').text(window.Kamerleed.details.sentence);
+        $('#marker').removeClass('block1 block2 block3 block4 block5 block6 block7 blockundefined').addClass('block' + window.Kamerleed.person.profile.block);
+        $('#marker div.avatar').attr('style', 'background: url(' + window.Kamerleed.person.profile.photo + ');');
+        $('#marker div.avatar img').attr('src', 'http://www.tweedekamer.nl/images/' + window.Kamerleed.person.profile.party.slug + '.jpg');
+        //$('#marker p.sentence').text(window.Kamerleed.details.sentence);
         $('#marker').fadeIn();        
     });
 };
