@@ -27,34 +27,6 @@ def find_member(slug, members)
   return filtered_members[0]
 end
 
-def seniority(kamerlid)
-  title = kamerlid['title']
-  seniority = kamerlid['seniority'].to_i
-
-  return "%s zit al %s dagen in de tweede kamer!" % [title, seniority]
-end
-
-def age(kamerlid)
-  title = kamerlid['title']
-  age = kamerlid['age'].to_i
-
-  return "Wist je dat %s alweer %s jaar oud is?" % [title, age]
-end
-
-def hometown(kamerlid)
-  title = kamerlid['title']
-  hometown = kamerlid['hometown']
-
-  return "Blijkbaar woont %s in %s!" % [title, hometown]
-end
-
-def birthplace(kamerlid)
-  title = kamerlid['title']
-  birthplace = kamerlid['birthplace']
-
-  return "%s werd geboren in %s." % [title, birthplace]
-end
-
 def load_mps
   members = []
   File.open('kamerleden.json', 'r') do |f|
@@ -103,20 +75,16 @@ get '/persons/random/json' do
 end
 
 get '/persons/:slug' do
-  response.headers['Content-type'] = "application/json"
-  
   @members = load_mps
-  @details = find_member(params[:slug], @members)
-  
-  @details.to_json
+  @parties = load_parties
+
+  erb :index
 end
 
 get '/persons/:slug/json' do
   response.headers['Content-type'] = "application/json"
   
-  @members = load_mps
-  @details = find_member(params[:slug], @members)
-  
+  @details = HTTParty.get('http://api.kamerleed.nl/v2.1/person/' + params[:slug])
   @details.to_json
 end
 
