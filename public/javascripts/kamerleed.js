@@ -16,14 +16,18 @@ window.Kamerleed.tidbits = [
             return sprintf("%s zit al %s dagen in de tweede kamer!", window.Kamerleed.person.profile.name, s);
         }
     },
-    /*
     FIXME: better to parse age for this?
     {
         title: 'age',
-        enabled: function() { return (window.Kamerleed.person.profile.date_of_birth != null); },
-        sentence: function() { }
+        enabled: function() { return (window.Kamerleed.person.profile.age != null); },
+        sentence: function() {
+            return sprintf(
+                "Wist je dat %s alweer %s jaar oud is?",
+                window.Kamerleed.person.profile.name,
+                window.Kamerleed.person.profile.age
+            )
+        }
     },
-    */
     {
         title: 'birthplace',
         enabled: function() { return (window.Kamerleed.person.profile.birth_place != null); },
