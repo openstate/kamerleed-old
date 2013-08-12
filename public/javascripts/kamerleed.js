@@ -96,7 +96,7 @@ window.Kamerleed.create_twitter_widget = function() {
     if (window.Kamerleed.person.profile.twitter.accounts.length > 0) {
         var username = window.Kamerleed.person.profile.twitter.accounts[0];
         console.log('creating twitter qidget for ' + username);
-        $('#twitter-widget-marker').html('<a class="twitter-timeline" href="https://twitter.com/' + username + '" width="300" data-widget-id="366942720322838528" data-screen-name="' + username + '">Tweets by @' + username + '</a>');
+        $('#twitter-widget-marker').html('<a style="display: none;" class="twitter-timeline" href="https://twitter.com/' + username + '" width="300" data-widget-id="366942720322838528" data-screen-name="' + username + '">Tweets by @' + username + '</a>');
         twttr.widgets.load();
     } else {
         $('#twitter-widget-marker').empty();
