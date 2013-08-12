@@ -16,7 +16,7 @@ window.Kamerleed.tidbits = [
             return sprintf("%s zit al %s dagen in de tweede kamer!", window.Kamerleed.person.profile.name, s);
         }
     },
-    FIXME: better to parse age for this?
+    // FIXME: better to parse age for this?
     {
         title: 'age',
         enabled: function() { return (window.Kamerleed.person.profile.age != null); },
@@ -88,7 +88,19 @@ window.Kamerleed.refresh_full_interface = function() {
     // do interface refresh here
     document.title = sprintf("%s - %s", window.Kamerleed.app.title, window.Kamerleed.person.profile.name);
     window.Kamerleed.refresh_marker();
+    window.Kamerleed.create_twitter_widget();
     console.log('Interface refreshed!'); 
+};
+
+window.Kamerleed.create_twitter_widget = function() {
+    if (window.Kamerleed.person.profile.twitter.accounts.length > 0) {
+        var username = window.Kamerleed.person.profile.twitter.accounts[0];
+        console.log('creating twitter qidget for ' + username);
+        $('#twitter-widget-marker').html('<a class="twitter-timeline" href="https://twitter.com/' + username + '" width="300" data-widget-id="366942720322838528" data-screen-name="' + username + '">Tweets by @' + username + '</a>');
+        twttr.widgets.load();
+    } else {
+        $('#twitter-widget-marker').empty();
+    }
 };
 
 window.Kamerleed.refresh_marker = function() {
