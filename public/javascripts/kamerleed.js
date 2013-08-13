@@ -89,6 +89,7 @@ Kamerleed.refresh_full_interface = function() {
     document.title = sprintf("%s - %s", Kamerleed.app.title, Kamerleed.person.profile.name);
     Kamerleed.refresh_marker();
     Kamerleed.create_twitter_widget();
+    Kamerleed.create_politwoops_widget();
     console.log('Interface refreshed!'); 
 };
 
@@ -101,6 +102,19 @@ Kamerleed.create_twitter_widget = function() {
     } else {
         $('#twitter-widget-marker').empty();
     }
+};
+
+Kamerleed.create_politwoops_widget = function() {
+    if (Kamerleed.person.profile.twitter.accounts.length > 0) {
+        var username = Kamerleed.person.profile.twitter.accounts[0];
+        $.get(sprintf('http://www.politwoops.com/user/%s.js?callback=?', username), function (data) {
+            console.log('Got politwoops data!');
+            console.dir(data);
+        }, 'jsonp');
+    } else {
+        $('#politwoops-widget-marker').empty();
+    }
+    
 };
 
 Kamerleed.refresh_marker = function() {
