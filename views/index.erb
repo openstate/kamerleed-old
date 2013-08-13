@@ -14,7 +14,30 @@
     margin: 100px auto 0 auto;
   }
   
+  #controls {
+    width: 100px;
+    margin: 0 auto;
+  }
+  
+  #controls a {
+    display: block;
+    float: left;
+    width: 16px;
+    height: 16px;
+    text-indent: -9999999px;
+    margin: 4px;   
+  }
+
+  .play {
+    background: url(/images/control_play.png);
+  }
+  
+  .next {
+    background: url(/images/control_fastforward.png);    
+  }
+
   #floor {
+    clear: both;
     background: url(/images/zaal.png);
     width: 500px;
     height: 374px;
@@ -156,6 +179,10 @@
 </head>
 <body>
   <div id="wrapper">
+    <div id="controls">
+      <a href="#" class="play">play</a>
+      <a href="#" class="next">next</a>
+    </div>
     <div id="floor">
       <div id="marker" style="display: none;" class="block">
         <div class="avatar">
