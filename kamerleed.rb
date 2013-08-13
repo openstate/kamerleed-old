@@ -11,6 +11,13 @@ set :session_secret, ENV["SESSION_KEY"] || 'too secret'
 
 enable :sessions
 
+# Usage: partial :foo
+helpers do
+  def partial(page, options={})
+    erb page, options.merge!(:layout => false)
+  end
+end
+
 def random_member(members)
   mp_id = session['mp_id'] || '0'
   if mp_id.to_i > 0

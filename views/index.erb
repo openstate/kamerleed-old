@@ -106,9 +106,44 @@
     height: 500px;
     border: 1px solid #999;
   }
+  
+  .twoops {
+    margin: 8px 4px;
+    clear: both;
+    border-bottom: 1px solid #999;
+    padding: 0 0 8px 0;
+  }
+    
+  .twoops img.avatar {
+    float: left;
+    margin: 0px 4px;
+    width: 73px;
+    height: 73px;
+  }
+  
+  .twoops .tweet {
+    float: right;
+    width: 210px;
+  }
+  
+  .twoops h3 {
+    margin: 0 0 4px 0;
+    font-size: 14px;
+  }
+  
+  .twoops p.username {
+    margin: 4px 0;
+    font-size: 12px;
+  }
+  
+  .twoops p.content {
+    font-size: 11px;
+    margin: 4px 0;
+  }
   </style>
   <script src="/javascripts/modernizr.custom.01318.js" type="text/javascript"> </script>
   <script src="/javascripts/tmpl.min.js" type="text/javascript"> </script>
+  <script type="text/x-tmpl" id="twoops"><%= partial :twoops %></script>
 </head>
 <body>
   <div id="wrapper">

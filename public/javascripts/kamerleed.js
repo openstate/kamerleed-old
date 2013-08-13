@@ -105,16 +105,17 @@ Kamerleed.create_twitter_widget = function() {
 };
 
 Kamerleed.create_politwoops_widget = function() {
+    $('#politwoops-widget-marker').empty();
     if (Kamerleed.person.profile.twitter.accounts.length > 0) {
         var username = Kamerleed.person.profile.twitter.accounts[0];
         $.get(sprintf('http://www.politwoops.com/user/%s.js?callback=?', username), function (data) {
             console.log('Got politwoops data!');
             console.dir(data);
+            $.each(data, function(idx, tweet) {
+                $('#politwoops-widget-marker').append($(tmpl('twoops', tweet)));
+            });
         }, 'jsonp');
-    } else {
-        $('#politwoops-widget-marker').empty();
     }
-    
 };
 
 Kamerleed.refresh_marker = function() {
