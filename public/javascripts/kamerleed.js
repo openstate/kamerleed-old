@@ -65,6 +65,16 @@ Kamerleed.init = function() {
     } else {
         console.log('At a totally random path ...');
     }
+    
+    $('#controls .play').click(function() {
+        console.log('should restart timer!');
+    });
+    
+    $('#controls .next').click(function() {
+        console.log('next pressed!');
+        Kamerleed.update();
+    });
+    
 };
 
 Kamerleed.load_person = function(slug) {
@@ -105,7 +115,7 @@ Kamerleed.create_twitter_widget = function() {
 };
 
 Kamerleed.create_politwoops_widget = function() {
-    $('#politwoops-widget-marker').height($('#politwoops-widget-marker').height() - 16);
+    $('#politwoops-widget-marker').height($('body').parent().height() - 32);
     $('#politwoops-list').empty();
     if (Kamerleed.person.profile.twitter.accounts.length > 0) {
         var username = Kamerleed.person.profile.twitter.accounts[0];
