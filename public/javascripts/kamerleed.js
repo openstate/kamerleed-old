@@ -53,6 +53,8 @@ Kamerleed.tidbits = [
 ];
 
 Kamerleed.init = function() {
+    moment.lang('nl');
+    
     // detemine what to load
     if (window.location.pathname == '/') {
         // get random member
@@ -123,7 +125,11 @@ Kamerleed.create_politwoops_widget = function() {
             console.log('Got politwoops data!');
             console.dir(data);
             $.each(data, function(idx, tweet) {
+                var deleted_at = moment(tweet.updated_at);
+                var created_at = moment(tweet.created_at);
                 $('#politwoops-list').append($(tmpl('twoops', tweet)));
+                $('#twoops-' + tweet.id + ' .deleted').text(moment(tweet.details.deleted_at).fromNow() + ' verwijderd');
+                $('#twoops-' + tweet.id + ' .after').text(deleted_at.from(created_at).replace('over', 'na'));
             });
         }, 'jsonp');
     }
