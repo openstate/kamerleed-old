@@ -86,12 +86,18 @@ Kamerleed.init = function() {
         console.log('At a totally random path ...');
     }
     
-    $('#controls .play').click(function() {
-        console.log('should restart timer!');
+    $('#control-playpause').click(function() {
+        Kamerleed.loopingEnabled = !Kamerleed.loopingEnabled;
+        if (Kamerleed.loopingEnabled) {
+            $('#control-playpause').removeClass('play').addClass('pause');
+        } else {
+            $('#control-playpause').removeClass('pause').addClass('play');            
+        }
     });
     
-    $('#controls .next').click(function() {
+    $('#control-ffwd').click(function() {
         console.log('next pressed!');
+        Kamerleed.counter = 0;
         Kamerleed.update();
     });
 
@@ -133,15 +139,16 @@ Kamerleed.create_twitter_widget = function() {
         console.log('creating twitter qidget for ' + username);
         $('#twitter-widget-marker').html('<a style="display: none;" class="twitter-timeline" href="https://twitter.com/' + username + '" width="300" data-widget-id="366942720322838528" data-screen-name="' + username + '">Tweets by @' + username + '</a>');
         twttr.widgets.load();
+        $('#twitter-widget-marker').fadeIn();
     } else {
-        $('#twitter-widget-marker').empty();
+        $('#twitter-widget-marker').fadeOut();
     }
 };
 
 Kamerleed.create_politwoops_widget = function() {
-    $('#politwoops-widget-marker').height($('body').parent().height() - 32);
-    $('#politwoops-list').empty();
     if (Kamerleed.person.profile.twitter.accounts.length > 0) {
+        $('#politwoops-widget-marker').height($('body').parent().height() - 32);
+        $('#politwoops-list').empty();
         var username = Kamerleed.person.profile.twitter.accounts[0];
         $.get(sprintf('http://www.politwoops.com/user/%s.js?callback=?', username), function (data) {
             console.log('Got politwoops data!');
@@ -153,22 +160,24 @@ Kamerleed.create_politwoops_widget = function() {
                 $('#twoops-' + tweet.id + ' .deleted').text(moment(tweet.details.deleted_at).fromNow() + ' verwijderd');
                 $('#twoops-' + tweet.id + ' .after').text(deleted_at.from(created_at).replace('over', 'na'));
             });
+            $('#politwoops-widget-marker').fadeIn();
         }, 'jsonp');
     }
 };
 
 Kamerleed.refresh_marker = function() {
-    $('#marker').fadeOut(500, function() {
-        var tidbit = Kamerleed.select_tidbit();
-        $('#marker').removeClass('block1 block2 block3 block4 block5 block6 block7 blockundefined').addClass('block' + Kamerleed.person.profile.block);
-        $('#marker div.avatar').attr('style', 'background: url(' + Kamerleed.person.profile.photo + ');');
-        $('#marker div.avatar img').attr('src', 'http://www.tweedekamer.nl/images/' + Kamerleed.person.profile.party.slug + '.jpg');
-        $('#marker p.sentence').text(tidbit.sentence());
-        $('#marker').fadeIn();        
-    });
+    var tidbit = Kamerleed.select_tidbit();
+    $('#marker').removeClass('block1 block2 block3 block4 block5 block6 block7 blockundefined').addClass('block' + Kamerleed.person.profile.block);
+    $('#marker div.avatar').attr('style', 'background: url(' + Kamerleed.person.profile.photo + ');');
+    $('#marker div.avatar img').attr('src', 'http://www.tweedekamer.nl/images/' + Kamerleed.person.profile.party.slug + '.jpg');
+    $('#marker p.sentence').text(tidbit.sentence());
+    $('#marker').fadeIn();        
 };
 
 Kamerleed.update = function() {
+    $('#twitter-widget-marker').fadeOut(500);
+    $('#politwoops-widget-marker').fadeOut(500);
+    $('#marker').fadeOut(500);
     $.get('/persons/random/json', function (data) {
         var slug = data['slug'];
         console.log('Should fetch data for ' + slug + ' now ...');

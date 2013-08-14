@@ -38,7 +38,7 @@ end
 
 def load_mps
   members = []
-  File.open('kamerleden.json', 'r') do |f|
+  File.open('kamerleden.json', 'r:UTF-8') do |f|
     members = JSON.parse(f.read)
   end
   
@@ -47,7 +47,7 @@ end
 
 def load_parties
   parties = []
-  File.open('parties.json', 'r') do |f|
+  File.open('parties.json', 'r:UTF-8') do |f|
     parties = JSON.parse(f.read)
   end
   

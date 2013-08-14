@@ -93,6 +93,10 @@
     margin: 4px;   
   }
 
+  .pause {
+    background: url(/images/control_pause.png);
+  }
+
   .play {
     background: url(/images/control_play.png);
   }
@@ -262,8 +266,8 @@
     	<span style="width: 0%;"></span>
     </div>
     <div id="controls">
-      <a href="#" class="play">play</a>
-      <a href="#" class="next">next</a>
+      <a id="control-playpause" href="#" class="pause">play</a>
+      <a id="control-ffwd" href="#" class="next">next</a>
     </div>
     <div id="floor">
       <div id="marker" style="display: none;" class="block">
@@ -278,7 +282,7 @@
     </div>
     <div id="twitter-widget-marker">
     </div>
-    <div id="politwoops-widget-marker">
+    <div id="politwoops-widget-marker" style="display: none;">
       <h2>Verwijderde tweets</h2>
       <div id="politwoops-list"></div>
     </div>
