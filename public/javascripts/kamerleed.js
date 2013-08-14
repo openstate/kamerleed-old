@@ -2,7 +2,8 @@ var Kamerleed = window.Kamerleed || {
     app: {
         title: 'Kamerleed'
     },
-    interval: 5000,
+    interval: 30,
+    counter: 0,
     loopingEnabled: false,
 };
 
@@ -52,6 +53,23 @@ Kamerleed.tidbits = [
     },
 ];
 
+Kamerleed.time_lapsed = function() {
+    console.log('time lapsed !');
+    if (Kamerleed.loopingEnabled) {
+        Kamerleed.counter += 1;
+    }
+
+    if (Kamerleed.counter > Kamerleed.interval) {
+        Kamerleed.counter = 0;
+        Kamerleed.loopingEnabled = false;
+        
+        Kamerleed.update();
+    }
+
+    var pct = Math.floor(Kamerleed.counter * 100 / Kamerleed.interval);
+    $('.meter span').attr('style', sprintf('width: %s%%;', pct));
+};
+
 Kamerleed.init = function() {
     moment.lang('nl');
     
@@ -76,7 +94,10 @@ Kamerleed.init = function() {
         console.log('next pressed!');
         Kamerleed.update();
     });
-    
+
+    setInterval(function() {
+        Kamerleed.time_lapsed();
+    }, 1000);
 };
 
 Kamerleed.load_person = function(slug) {
@@ -84,7 +105,7 @@ Kamerleed.load_person = function(slug) {
         Kamerleed.person = data;
         Kamerleed.refresh_full_interface();
         // loop the interface
-        Kamerleed.looper();
+        //Kamerleed.looper();
     });
 };
 
@@ -102,6 +123,7 @@ Kamerleed.refresh_full_interface = function() {
     Kamerleed.refresh_marker();
     Kamerleed.create_twitter_widget();
     Kamerleed.create_politwoops_widget();
+    Kamerleed.loopingEnabled = true;
     console.log('Interface refreshed!'); 
 };
 
@@ -154,19 +176,7 @@ Kamerleed.update = function() {
     }, 'json');
 };
 
-Kamerleed.looper = function() {
-    if (Kamerleed.loopingEnabled) {
-        setTimeout(function() {
-            Kamerleed.update();
-        }, Kamerleed.interval);
-    }
-};
-
 $(document).ready(function() {
     console.log('kamerleed');
     Kamerleed.init();
-
-    setTimeout(function() {
-        Kamerleed.looper();
-    }, Kamerleed.interval);
 });
