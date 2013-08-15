@@ -120,25 +120,19 @@
     border: 1px solid black;
     background: white;
   }
-
-  .avatar {
-    width: 112px;
-    height: 144px;
-  }
   
-  .avatar img {
-    width: 67px;
-    height: 67px;
-    position: relative;
-    top: 77px;
-    left: 45px;
-  }
-
-  #marker img {
+  img.avatar {
     float: left;
+    margin: 4px;
   }
 
-  #marker p {
+  img.party {
+    float: right;
+    margin: 4px;
+  }
+
+  #marker .info {
+    clear: both;
     margin: 0;
   }
 
@@ -171,17 +165,17 @@
 
   .block4 {
     top: 260px;
-    left: 300px;
+    left: 220px;
   }
 
   .block5 {
     top: 220px;
-    left: 380px;
+    left: 230px;
   }
 
   .block6 {
     top: 150px;
-    left: 420px;
+    left: 240px;
   }
 
   #twitter-widget-marker {
@@ -271,9 +265,8 @@
     </div>
     <div id="floor">
       <div id="marker" style="display: none;" class="block">
-        <div class="avatar">
-          <img src="" />
-        </div>
+        <img class="avatar" src="" />
+        <img class="party" src="" />
         <div class="info">
           <p class="sentence"></p>
         </div>

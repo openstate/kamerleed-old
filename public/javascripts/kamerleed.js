@@ -168,8 +168,8 @@ Kamerleed.create_politwoops_widget = function() {
 Kamerleed.refresh_marker = function() {
     var tidbit = Kamerleed.select_tidbit();
     $('#marker').removeClass('block1 block2 block3 block4 block5 block6 block7 blockundefined').addClass('block' + Kamerleed.person.profile.block);
-    $('#marker div.avatar').attr('style', 'background: url(' + Kamerleed.person.profile.photo + ');');
-    $('#marker div.avatar img').attr('src', 'http://www.tweedekamer.nl/images/' + Kamerleed.person.profile.party.slug + '.jpg');
+    $('#marker img.avatar').attr('src', Kamerleed.person.profile.photo);
+    $('#marker img.party').attr('src', 'http://www.tweedekamer.nl/images/' + Kamerleed.person.profile.party.slug + '.jpg');
     $('#marker p.sentence').text(tidbit.sentence());
     $('#marker').fadeIn();        
 };
