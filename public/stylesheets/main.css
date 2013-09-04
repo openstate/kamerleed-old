@@ -1,186 +1,186 @@
-  body {
+body {
     background: white;
     color: black;
-/*    font-size: 5em; */
+    /*    font-size: 5em; */
     font-family: Helvetica, Verdana, Arial, sans-serif;
-  }
-  
-  #wrapper {
+}
+
+#wrapper {
     width: 700px;
     margin: 100px auto 0 auto;
-  }
-  
-  .meter {
+}
+
+.meter {
     margin: 0 auto;
     width: 500px;
-  	height: 5px;  /* Can be anything */
-  	position: relative;
-  	background: #eee;
-  	padding: 2px;
-  	-webkit-box-shadow: inset 0 -1px 1px rgba(255,255,255,0.3);
-  	-moz-box-shadow   : inset 0 -1px 1px rgba(255,255,255,0.3);
-  	box-shadow        : inset 0 -1px 1px rgba(255,255,255,0.3);
-  }
-  
-  .meter > span {
-  	display: block;
-  	height: 100%;
-  	   -webkit-border-top-right-radius: 8px;
-  	-webkit-border-bottom-right-radius: 8px;
-  	       -moz-border-radius-topright: 8px;
-  	    -moz-border-radius-bottomright: 8px;
-  	           border-top-right-radius: 8px;
-  	        border-bottom-right-radius: 8px;
-  	    -webkit-border-top-left-radius: 20px;
-  	 -webkit-border-bottom-left-radius: 20px;
-  	        -moz-border-radius-topleft: 20px;
-  	     -moz-border-radius-bottomleft: 20px;
-  	            border-top-left-radius: 20px;
-  	         border-bottom-left-radius: 20px;
-  	background-color: rgb(43,194,83);
-  	background-image: -webkit-gradient(
-  	  linear,
-  	  left bottom,
-  	  left top,
-  	  color-stop(0, rgb(43,194,83)),
-  	  color-stop(1, rgb(84,240,84))
-  	 );
-  	background-image: -webkit-linear-gradient(
-  	  center bottom,
-  	  rgb(43,194,83) 37%,
-  	  rgb(84,240,84) 69%
-  	 );
-  	background-image: -moz-linear-gradient(
-  	  center bottom,
-  	  rgb(43,194,83) 37%,
-  	  rgb(84,240,84) 69%
-  	 );
-  	background-image: -ms-linear-gradient(
-  	  center bottom,
-  	  rgb(43,194,83) 37%,
-  	  rgb(84,240,84) 69%
-  	 );
-  	background-image: -o-linear-gradient(
-  	  center bottom,
-  	  rgb(43,194,83) 37%,
-  	  rgb(84,240,84) 69%
-  	 );
-  	-webkit-box-shadow: 
-  	  inset 0 2px 9px  rgba(255,255,255,0.3),
-  	  inset 0 -2px 6px rgba(0,0,0,0.4);
-  	-moz-box-shadow: 
-  	  inset 0 2px 9px  rgba(255,255,255,0.3),
-  	  inset 0 -2px 6px rgba(0,0,0,0.4);
-  	position: relative;
-  	overflow: hidden;
-  }
-  
-  #controls {
+	height: 5px;  /* Can be anything */
+	position: relative;
+	background: #eee;
+	padding: 2px;
+	-webkit-box-shadow: inset 0 -1px 1px rgba(255,255,255,0.3);
+	-moz-box-shadow   : inset 0 -1px 1px rgba(255,255,255,0.3);
+	box-shadow        : inset 0 -1px 1px rgba(255,255,255,0.3);
+}
+
+.meter > span {
+	display: block;
+	height: 100%;
+	   -webkit-border-top-right-radius: 8px;
+	-webkit-border-bottom-right-radius: 8px;
+	       -moz-border-radius-topright: 8px;
+	    -moz-border-radius-bottomright: 8px;
+	           border-top-right-radius: 8px;
+	        border-bottom-right-radius: 8px;
+	    -webkit-border-top-left-radius: 20px;
+	 -webkit-border-bottom-left-radius: 20px;
+	        -moz-border-radius-topleft: 20px;
+	     -moz-border-radius-bottomleft: 20px;
+	            border-top-left-radius: 20px;
+	         border-bottom-left-radius: 20px;
+	background-color: rgb(43,194,83);
+	background-image: -webkit-gradient(
+	  linear,
+	  left bottom,
+	  left top,
+	  color-stop(0, rgb(43,194,83)),
+	  color-stop(1, rgb(84,240,84))
+	 );
+	background-image: -webkit-linear-gradient(
+	  center bottom,
+	  rgb(43,194,83) 37%,
+	  rgb(84,240,84) 69%
+	 );
+	background-image: -moz-linear-gradient(
+	  center bottom,
+	  rgb(43,194,83) 37%,
+	  rgb(84,240,84) 69%
+	 );
+	background-image: -ms-linear-gradient(
+	  center bottom,
+	  rgb(43,194,83) 37%,
+	  rgb(84,240,84) 69%
+	 );
+	background-image: -o-linear-gradient(
+	  center bottom,
+	  rgb(43,194,83) 37%,
+	  rgb(84,240,84) 69%
+	 );
+	-webkit-box-shadow: 
+	  inset 0 2px 9px  rgba(255,255,255,0.3),
+	  inset 0 -2px 6px rgba(0,0,0,0.4);
+	-moz-box-shadow: 
+	  inset 0 2px 9px  rgba(255,255,255,0.3),
+	  inset 0 -2px 6px rgba(0,0,0,0.4);
+	position: relative;
+	overflow: hidden;
+}
+
+#controls {
     width: 100px;
     margin: 0 auto;
-  }
-  
-  #controls a {
+}
+
+#controls a {
     display: block;
     float: left;
     width: 16px;
     height: 16px;
     text-indent: -9999999px;
     margin: 4px;   
-  }
+}
 
-  .pause {
+.pause {
     background: url(/images/control_pause.png);
-  }
+}
 
-  .play {
+.play {
     background: url(/images/control_play.png);
-  }
-  
-  .next {
-    background: url(/images/control_fastforward.png);    
-  }
+}
 
-  #floor {
+.next {
+    background: url(/images/control_fastforward.png);    
+}
+
+#floor {
     clear: both;
     background: url(/images/zaal.png);
     width: 500px;
     height: 374px;
     margin: 0 auto;
-  }
+}
 
-  #marker {
+#marker {
     position: relative;
     padding: 5px;
     width: 260px;
     border: 1px solid black;
     background: white;
-  }
-  
-  img.avatar {
+}
+
+img.avatar {
     float: left;
     margin: 4px;
-  }
+}
 
-  img.party {
+img.party {
     float: right;
     margin: 4px;
-  }
+}
 
-  #marker .info {
+#marker .info {
     clear: both;
     margin: 0;
-  }
+}
 
-  #sharing {
+#sharing {
     margin: 80px 0 0 250px;
-  }
+}
 
-  .sharing-button {
+.sharing-button {
     float: left;
-  }
-  
-  .clear {
+}
+
+.clear {
     clear: both;
-  }
-  
-  .block1 {
+}
+
+.block1 {
     top: 150px;
     left: 80px;
-  }
+}
 
-  .block2 {
+.block2 {
     top: 220px;
     left: 120px;
-  }
+}
 
-  .block3 {
+.block3 {
     top: 260px;
     left: 200px;
-  }
+}
 
-  .block4 {
+.block4 {
     top: 260px;
     left: 220px;
-  }
+}
 
-  .block5 {
+.block5 {
     top: 220px;
     left: 230px;
-  }
+}
 
-  .block6 {
+.block6 {
     top: 150px;
     left: 240px;
-  }
+}
 
-  #twitter-widget-marker {
+#twitter-widget-marker {
     position: absolute;
     top: 10px;
     left: 10px;
-  }
+}
 
-  #politwoops-widget-marker {
+#politwoops-widget-marker {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -189,59 +189,59 @@
     overflow: scroll;
     overflow-x: hidden;
     border: 1px solid #999;
-  }
-  
-  .twoops {
+}
+
+.twoops {
     margin: 8px 4px;
     clear: both;
     border-bottom: 1px solid #999;
-  }
-    
-  .twoops img.avatar {
+}
+
+.twoops img.avatar {
     float: left;
     margin: 0px 4px;
     width: 73px;
     height: 73px;
-  }
-  
-  .twoops a {
+}
+
+.twoops a {
     color: #111;
     text-decoration: none;
-  }
+}
 
-  .twoops a:hover {
+.twoops a:hover {
     color: #111;
     text-decoration: underline;
-  }
-  
-  .twoops .tweet {
+}
+
+.twoops .tweet {
     float: right;
     width: 190px;
-  }
-  
-  .twoops h3 {
+}
+
+.twoops h3 {
     margin: 0 0 4px 0;
     font-size: 11px;
-  }
-  
-  .twoops p {
+}
+
+.twoops p {
     margin: 4px 0;
     font-size: 10px;
-  }
-  
-  .twoops .info {
+}
+
+.twoops .info {
     font-size: 9px;
-  }
-  
-  .twoops p.content {
+}
+
+.twoops p.content {
     clear: both;
     font-size: 11px;
     margin: 20px 4px 8px 4px;
-  }
-  
-  #politwoops-widget-marker h2 {
+}
+
+#politwoops-widget-marker h2 {
     margin: 8px;
     padding-bottom: 8px;
     font-size: 15px;
     border-bottom: 1px solid #999;
-  }
+}
