@@ -115,6 +115,7 @@ body {
     width: 260px;
     border: 1px solid black;
     background: white;
+    z-index: 60000;
 }
 
 img.avatar {
@@ -172,6 +173,11 @@ img.party {
 .block6 {
     top: 150px;
     left: 240px;
+}
+
+.sidebar-widget {
+    z-index: 5;
+    background: white;
 }
 
 #twitter-widget-marker {
